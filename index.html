@@ -1,24 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Hot Pants & Tony - Official Site</title>
-
-
-    <!-- Google Font: Inter Tight (SemiBold 600) -->
-
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-
-
     <style>
 
-        /* 1. Page Setup */
         body {
             margin: 0;
             padding: 0;
@@ -27,7 +15,6 @@
             color: #333;
         }
 
-        /* 2. The Hero Wrapper */
         .hero-wrapper {
             background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
             display: flex;
@@ -51,17 +38,21 @@
             position: relative;
             z-index: 1;
             filter: drop-shadow(0px 0px 10px rgba(255, 0, 255, 0.2));
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 0.9s;
         }
 
         .dark-tint {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.25);
             z-index: 5;
             pointer-events: none;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1.6s;
         }
 
         .logo-overlay {
@@ -72,6 +63,9 @@
             width: 60%;
             z-index: 10;
             pointer-events: none;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.2s;
         }
 
         .logo-overlay img {
@@ -80,7 +74,6 @@
             filter: drop-shadow(0px 0px 20px rgba(0,0,0,1));
         }
 
-        /* ── Hero Fade-in Animations ── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translate(-50%, -40%); }
             to   { opacity: 1; transform: translate(-50%, -50%); }
@@ -91,28 +84,6 @@
             to   { opacity: 1; }
         }
 
-        /* Logo leads — starts immediately */
-        .logo-overlay {
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        /* Characters come in after logo */
-        .character-layer {
-            opacity: 0;
-            animation: fadeIn 1.2s ease forwards;
-            animation-delay: 0.9s;
-        }
-
-        /* Dark tint settles in last */
-        .dark-tint {
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 1.6s;
-        }
-
-        /* 3. The Info Section */
         .info-section {
             background-color: #ffffff;
             max-width: 900px;
@@ -194,10 +165,8 @@
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 0;
         }
 
-        /* Prev / Next buttons */
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -226,7 +195,6 @@
         .carousel-btn.prev { left: 12px; }
         .carousel-btn.next { right: 12px; }
 
-        /* Dots */
         .carousel-dots {
             position: absolute;
             bottom: 12px;
@@ -253,7 +221,6 @@
             transform: scale(1.25);
         }
 
-        /* Caption overlay (optional, shown on hover) */
         .carousel-caption {
             position: absolute;
             bottom: 0;
@@ -273,6 +240,15 @@
         }
         /* ===================== END CAROUSEL ===================== */
 
+        .spotify-embed {
+            margin: 20px 0;
+        }
+
+        .spotify-embed iframe {
+            display: block;
+            border-radius: 12px;
+        }
+
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -291,7 +267,6 @@
             padding: 5px 0;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
             .info-section { padding: 30px; margin: 0 auto; }
@@ -305,9 +280,7 @@
         }
 
     </style>
-
 </head>
-
 <body>
 
     <div class="hero-wrapper">
@@ -326,18 +299,16 @@
 
             <h2>The Dynamic Duo</h2>
 
-            <!-- Floated vertical video -->
             <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/oWgqxuIePRM?si=QNUFUPqoVd_41adj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/oWgqxuIePRM?si=QNUFUPqoVd_41adj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
             <p>
                 Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that's anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn't your typical violin-and-guitar act—there's no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they're delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that's as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin' guitar, anything can happen!
             </p>
 
-            <!-- ===================== CAROUSEL ===================== -->
+            <!-- CAROUSEL -->
             <div class="carousel" id="photoCarousel" aria-label="Hot Pants & Tony photo slideshow">
-
                 <div class="carousel-track" id="carouselTrack">
 
                     <div class="carousel-slide">
@@ -345,7 +316,6 @@
                         <div class="carousel-caption">Hot Pants &amp; Tony in action</div>
                     </div>
 
-                    <!-- Add more slides here — just duplicate the block above and change src/alt/caption -->
                     <div class="carousel-slide">
                         <img src="img/bonetflynn2.jpg" alt="On stage together">
                         <div class="carousel-caption">On stage together</div>
@@ -360,28 +330,25 @@
 
                 <button class="carousel-btn prev" id="prevBtn" aria-label="Previous photo">&#8592;</button>
                 <button class="carousel-btn next" id="nextBtn" aria-label="Next photo">&#8594;</button>
-
                 <div class="carousel-dots" id="carouselDots"></div>
-
             </div>
-            <!-- ===================== END CAROUSEL ===================== -->
+            <!-- END CAROUSEL -->
 
-  			<iframe
-                src="https://open.spotify.com/embed/track/3OF3niE51qk4G9pjYEhziK"
-                width="100%"
-                height="152"
-                frameborder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                style="border-radius: 12px; margin-top: 10px;">
-            </iframe>
-
+            <!-- SPOTIFY -->
+            <div class="spotify-embed">
+                <iframe
+                    src="https://open.spotify.com/embed/track/3OF3niE51qk4G9pjYEhziK"
+                    width="100%"
+                    height="152"
+                    frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+            </div>
 
             <p>
                 Behind the retro swagger, Hot Pants & Tony are the alter egos of acclaimed performers Deni Bonet and Chris Flynn, whose long-running musical partnership has taken them from Carnegie Hall and the White House, to the Great Wall of China and stages across the U.S. and Ireland. Together and individually, they have shared bills with artists including Cyndi Lauper, R.E.M., Mundy, Sarah McLachlan, The Chieftains, and members of The Pogues and Black 47. With Hot Pants & Tony, they bring that same world-class musicianship and chemistry to a wildly fun, crowd-pleasing covers show built for packed pubs, lively festivals, and unforgettable nights.
             </p>
-
-          
 
         </div>
 
@@ -400,7 +367,7 @@
             <div class="contact">
                 <h2>Booking & Press</h2>
                 <div class="contact-info">
-                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f4faf4f4fafdf4d3fbe3e7fcfdeabdf0fcfe">[email&#160;protected]</a></p>
+                    <p><strong>Email:</strong> gigging@hptony.com</p>
                     <p><strong>Instagram:</strong> @HotPantsTony</p>
                     <p><strong>Based In:</strong> Trenton, NJ</p>
                 </div>
@@ -410,13 +377,14 @@
 
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         (function () {
             const track = document.getElementById('carouselTrack');
             const slides = track.querySelectorAll('.carousel-slide');
             const dotsContainer = document.getElementById('carouselDots');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
+            const carousel = document.getElementById('photoCarousel');
             let current = 0;
             let autoTimer;
 
@@ -425,7 +393,7 @@
                 const dot = document.createElement('button');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-                dot.addEventListener('click', () => goTo(i));
+                dot.addEventListener('click', () => { goTo(i); resetAuto(); });
                 dotsContainer.appendChild(dot);
             });
 
@@ -450,14 +418,21 @@
                 if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
             });
 
-            // Auto-advance every 4 seconds
             function startAuto() {
                 autoTimer = setInterval(() => goTo(current + 1), 4000);
             }
+
             function resetAuto() {
                 clearInterval(autoTimer);
                 startAuto();
             }
 
-            // Pause on hover
-            const carousel = document.getElementById('photoCar
+            carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+            carousel.addEventListener('mouseleave', startAuto);
+
+            startAuto();
+        })();
+    </script>
+
+</body>
+</html>
