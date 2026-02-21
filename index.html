@@ -19,420 +19,409 @@
     <style>
 
         /* 1. Page Setup */
-
         body {
-
             margin: 0;
-
             padding: 0;
-
             background-color: #f4f4f4;
-
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-
             color: #333;
-
         }
-
 
         /* 2. The Hero Wrapper */
-
         .hero-wrapper {
-
             background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
-
             display: flex;
-
             justify-content: center;
-
             width: 100%;
-
             padding: 40px 0;
-
         }
-
 
         .art-container {
-
             position: relative;
-
             width: 100%;
-
             max-width: 900px;
-
             line-height: 0;
-
             filter: drop-shadow(0px 0px 50px rgba(75, 0, 130, 0.5));
-
         }
-
 
         .character-layer {
-
             width: 100%;
-
             height: auto;
-
             display: block;
-
             position: relative;
-
             z-index: 1;
-
             filter: drop-shadow(0px 0px 10px rgba(255, 0, 255, 0.2));
-
         }
-
 
         .dark-tint {
-
             position: absolute;
-
             top: 0;
-
             left: 0;
-
             width: 100%;
-
             height: 100%;
-
             background-color: rgba(0, 0, 0, 0.25);
-
             z-index: 5;
-
             pointer-events: none;
-
         }
-
 
         .logo-overlay {
-
             position: absolute;
-
             top: 60%;
-
             left: 50%;
-
             transform: translate(-50%, -50%);
-
             width: 60%;
-
             z-index: 10;
-
             pointer-events: none;
-
         }
-
 
         .logo-overlay img {
-
             width: 100%;
-
             height: auto;
-
             filter: drop-shadow(0px 0px 20px rgba(0,0,0,1));
-
         }
-
 
         /* 3. The Info Section */
-
         .info-section {
-
             background-color: #ffffff;
-
             max-width: 900px;
-
             margin: -20px auto 40px;
-
             padding: 50px;
-
             box-sizing: border-box;
-
             box-shadow: 0px 15px 40px rgba(0,0,0,0.2);
-
             position: relative;
-
             z-index: 20;
-
             border-radius: 4px;
-
         }
-
 
         .bio-full {
-
             border-bottom: 1px solid #eee;
-
             padding-bottom: 30px;
-
             margin-bottom: 30px;
-
             line-height: 1.8;
-
             font-size: 1.1rem;
-
         }
-
-
-        /* Clearfix so floats don't break layout below */
 
         .bio-full::after {
-
             content: "";
-
             display: table;
-
             clear: both;
-
         }
-
-
-        /* H2: Inter Tight 600, uppercase, 2rem */
 
         h2 {
-
             font-family: 'Inter Tight', sans-serif;
-
             font-weight: 600;
-
             font-size: 2rem;
-
             text-transform: uppercase;
-
             letter-spacing: 2px;
-
             color: #4b0082;
-
             margin-bottom: 20px;
-
             border-left: 5px solid #4b0082;
-
             padding-left: 15px;
-
         }
-
-
-        /* Vertical video floated right so text wraps underneath it */
 
         .video-container {
-
             float: right;
-
             width: 320px;
-
             aspect-ratio: 9 / 16;
-
-            margin: 0 0 20px 40px; /* top right bottom left */
-
+            margin: 0 0 20px 40px;
             border-radius: 8px;
-
             overflow: hidden;
-
             background: #000;
-
             box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-
         }
-
 
         .video-container iframe {
-
             width: 100%;
-
             height: 100%;
-
             border: 0;
-
         }
 
-
-        /* Bio image */
-
-        .bio-image {
-
+        /* ===================== CAROUSEL ===================== */
+        .carousel {
+            position: relative;
             width: 100%;
-
-            height: auto;
-
             border-radius: 8px;
-
+            overflow: hidden;
             margin: 30px 0;
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-
-            display: block;
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            background: #111;
+            user-select: none;
         }
 
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+        }
+
+        /* Prev / Next buttons */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(75, 0, 130, 0.75);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(75, 0, 130, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev { left: 12px; }
+        .carousel-btn.next { right: 12px; }
+
+        /* Dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: #fff;
+            transform: scale(1.25);
+        }
+
+        /* Caption overlay (optional, shown on hover) */
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px 14px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.55));
+            color: #fff;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .carousel:hover .carousel-caption {
+            opacity: 1;
+        }
+        /* ===================== END CAROUSEL ===================== */
 
         .info-grid {
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 50px;
-
             margin-bottom: 40px;
-
         }
-
 
         .schedule-list, .contact-info {
-
             list-style: none;
-
             padding: 0;
-
             line-height: 2;
-
         }
-
 
         .schedule-list li {
-
             border-bottom: 1px dashed #ddd;
-
             padding: 5px 0;
-
         }
 
-
         /* Mobile Adjustments */
-
         @media (max-width: 768px) {
-
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
-
             .info-section { padding: 30px; margin: 0 auto; }
-
             .logo-overlay { width: 85%; }
-
-
-            /* Stop floating on mobile so it stacks nicely */
-
             .video-container {
-
                 float: none;
-
                 width: 100%;
-
                 max-width: 420px;
-
                 margin: 20px auto;
-
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
 
-
     <div class="hero-wrapper">
-
         <div class="art-container">
-
             <img src="img/hptguild.png" alt="Hot Pants and Tony Characters" class="character-layer">
-
             <div class="dark-tint"></div>
-
             <div class="logo-overlay">
-
                 <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
-
             </div>
-
         </div>
-
     </div>
-
 
     <div class="info-section">
 
         <div class="bio-full">
 
-
             <h2>The Dynamic Duo</h2>
 
-
             <!-- Floated vertical video -->
-
             <div class="video-container">
-
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/oWgqxuIePRM?si=QNUFUPqoVd_41adj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
             </div>
 
-
             <p>
-
-                Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that’s anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn’t your typical violin-and-guitar act—there’s no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they’re delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that’s as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin’ guitar, anything can happen!
-
+                Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that's anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn't your typical violin-and-guitar act—there's no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they're delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that's as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin' guitar, anything can happen!
             </p>
 
+            <!-- ===================== CAROUSEL ===================== -->
+            <div class="carousel" id="photoCarousel" aria-label="Hot Pants & Tony photo slideshow">
 
-            <img src="img/bonetflynn.png" alt="Hot Pants & Tony in action" class="bio-image">
+                <div class="carousel-track" id="carouselTrack">
 
+                    <div class="carousel-slide">
+                        <img src="img/bonetflynn.png" alt="Hot Pants & Tony in action">
+                        <div class="carousel-caption">Hot Pants &amp; Tony in action</div>
+                    </div>
+
+                    <!-- Add more slides here — just duplicate the block above and change src/alt/caption -->
+                    <div class="carousel-slide">
+                        <img src="img/bonetflynn.png" alt="On stage together">
+                        <div class="carousel-caption">On stage together</div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <img src="img/bonetflynn.png" alt="Live performance">
+                        <div class="carousel-caption">Live performance</div>
+                    </div>
+
+                </div>
+
+                <button class="carousel-btn prev" id="prevBtn" aria-label="Previous photo">&#8592;</button>
+                <button class="carousel-btn next" id="nextBtn" aria-label="Next photo">&#8594;</button>
+
+                <div class="carousel-dots" id="carouselDots"></div>
+
+            </div>
+            <!-- ===================== END CAROUSEL ===================== -->
 
             <p>
-
                 Behind the retro swagger, Hot Pants & Tony are the alter egos of acclaimed performers Deni Bonet and Chris Flynn, whose long-running musical partnership has taken them from Carnegie Hall and the White House, to the Great Wall of China and stages across the U.S. and Ireland. Together and individually, they have shared bills with artists including Cyndi Lauper, R.E.M., Mundy, Sarah McLachlan, The Chieftains, and members of The Pogues and Black 47. With Hot Pants & Tony, they bring that same world-class musicianship and chemistry to a wildly fun, crowd-pleasing covers show built for packed pubs, lively festivals, and unforgettable nights.
-
             </p>
-
 
         </div>
-
 
         <div class="info-grid">
 
             <div class="schedule">
-
                 <h2>Live Dates</h2>
-
                 <ul class="schedule-list">
-
                     <li><strong>FEB 24</strong> — The Union Club, NJ</li>
-
                     <li><strong>MAR 12</strong> — Trenton Arts Hall</li>
-
                     <li><strong>APR 05</strong> — Private Event, Princeton</li>
-
                     <li><strong>MAY 19</strong> — Asbury Park Soundstage</li>
-
                 </ul>
-
             </div>
 
-
             <div class="contact">
-
                 <h2>Booking & Press</h2>
-
                 <div class="contact-info">
-
                     <p><strong>Email:</strong> gigging@hptony.com</p>
-
                     <p><strong>Instagram:</strong> @HotPantsTony</p>
-
                     <p><strong>Based In:</strong> Trenton, NJ</p>
-
                 </div>
-
             </div>
 
         </div>
 
-
     </div>
 
+    <script>
+        (function () {
+            const track = document.getElementById('carouselTrack');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsContainer = document.getElementById('carouselDots');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let current = 0;
+            let autoTimer;
+
+            // Build dots
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            function getDots() {
+                return dotsContainer.querySelectorAll('.carousel-dot');
+            }
+
+            function goTo(index) {
+                current = (index + slides.length) % slides.length;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                getDots().forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+            nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+            // Swipe support
+            let startX = 0;
+            track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
+            });
+
+            // Auto-advance every 4 seconds
+            function startAuto() {
+                autoTimer = setInterval(() => goTo(current + 1), 4000);
+            }
+            function resetAuto() {
+                clearInterval(autoTimer);
+                startAuto();
+            }
+
+            // Pause on hover
+            const carousel = document.getElementById('photoCarousel');
+            carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+            carousel.addEventListener('mouseleave', startAuto);
+
+            startAuto();
+        })();
+    </script>
 
 </body>
-
-</html> 
+</html>
