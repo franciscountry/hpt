@@ -26,74 +26,29 @@
         }
         @keyframes fadeOut {
             from { opacity: 1; }
-            to   { opacity: 0; pointer-events: none; }
+            to   { opacity: 0; }
         }
 
-        /* ===================== INTRO SPLASH ===================== */
-        /* Sits in the page flow, same 600px height as the carousel beneath */
-        .hero-intro {
-            width: 100%;
-            height: 600px;
-            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 30;
-            /* Hold for 3s, then fade out over 1s */
-            animation: fadeOut 1s ease forwards;
-            animation-delay: 3s;
-            pointer-events: none;
-        }
-
-        .hero-intro-logo {
-            width: 55%;
-            max-width: 580px;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.3s;
-        }
-
-        .hero-intro-logo img {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0px 0px 25px rgba(0,0,0,1));
-        }
-
-        /* ===================== PAGE WRAPPER ===================== */
-        /* Centers everything at 1100px */
+        /* ===================== HERO BLOCK ===================== */
+        /* Single container that holds both splash and carousel at the same height */
         .page-wrap {
             max-width: 1100px;
             margin: 0 auto;
         }
 
-        /* ===================== AVATAR LOGO ===================== */
-        .site-logo-avatar {
-            display: block;
-            width: 150px;
-            padding: 14px 0 8px 20px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 4.2s;
-        }
-
-        .site-logo-avatar img {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0px 2px 6px rgba(75,0,130,0.35));
-        }
-
-        /* ===================== HERO CAROUSEL ===================== */
-        .hero-carousel {
+        .hero-block {
             position: relative;
             width: 100%;
             height: 600px;
+        }
+
+        /* ── Carousel sits at the bottom of the stack ── */
+        .hero-carousel {
+            position: absolute;
+            inset: 0;
             overflow: hidden;
             background: #111;
             border-radius: 4px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 3.8s;
         }
 
         .hero-carousel-track {
@@ -128,7 +83,7 @@
             pointer-events: none;
         }
 
-        .hero-carousel:hover .hero-caption {
+        .hero-block:hover .hero-caption {
             opacity: 1;
         }
 
@@ -184,6 +139,52 @@
         .hero-carousel-dot.active {
             background: #fff;
             transform: scale(1.25);
+        }
+
+        /* ── Splash sits on top, fades out ── */
+        .hero-splash {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            border-radius: 4px;
+            /* Fade out after 3s hold */
+            animation: fadeOut 1.2s ease forwards;
+            animation-delay: 3s;
+            pointer-events: none;
+        }
+
+        .hero-splash-logo {
+            width: 55%;
+            max-width: 560px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-splash-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 0px 25px rgba(0,0,0,1));
+        }
+
+        /* ===================== AVATAR LOGO ===================== */
+        .site-logo-avatar {
+            display: block;
+            width: 150px;
+            padding: 14px 0 8px 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 4s;
+        }
+
+        .site-logo-avatar img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 2px 6px rgba(75,0,130,0.35));
         }
 
         /* ===================== INFO SECTION ===================== */
@@ -373,7 +374,7 @@
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
             .info-section { padding: 30px; }
-            .hero-intro, .hero-carousel { height: 400px; }
+            .hero-block { height: 400px; }
             .site-logo-avatar { width: 110px; }
             .video-container {
                 float: none;
@@ -387,44 +388,51 @@
 </head>
 <body>
 
-    <!-- INTRO SPLASH -->
-    <div class="hero-intro">
-        <div class="hero-intro-logo">
-            <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
-        </div>
-    </div>
-
-    <!-- AVATAR + HERO CAROUSEL -->
     <div class="page-wrap">
 
+        <!-- AVATAR LOGO -->
         <a class="site-logo-avatar" href="#">
             <img src="img/hptscript.png" alt="Hot Pants & Tony">
         </a>
 
-        <div class="hero-carousel" id="heroCarousel" aria-label="Hot Pants & Tony hero photos">
-            <div class="hero-carousel-track" id="heroTrack">
+        <!-- HERO BLOCK: carousel + splash stacked -->
+        <div class="hero-block">
 
-                <div class="hero-carousel-slide">
-                    <img src="img/bonetflynn.png" alt="Hot Pants & Tony">
-                    <div class="hero-caption">Hot Pants &amp; Tony</div>
+            <!-- Carousel underneath -->
+            <div class="hero-carousel" id="heroCarousel" aria-label="Hot Pants & Tony photos">
+                <div class="hero-carousel-track" id="heroTrack">
+
+                    <div class="hero-carousel-slide">
+                        <img src="img/bonetflynn.png" alt="Hot Pants & Tony">
+                        <div class="hero-caption">Hot Pants &amp; Tony</div>
+                    </div>
+
+                    <div class="hero-carousel-slide">
+                        <img src="img/bonetflynn2.jpg" alt="On stage together">
+                        <div class="hero-caption">On stage together</div>
+                    </div>
+
+                    <div class="hero-carousel-slide">
+                        <img src="img/bonetflynn.png" alt="Live performance">
+                        <div class="hero-caption">Live performance</div>
+                    </div>
+
                 </div>
 
-                <div class="hero-carousel-slide">
-                    <img src="img/bonetflynn2.jpg" alt="On stage together">
-                    <div class="hero-caption">On stage together</div>
-                </div>
-
-                <div class="hero-carousel-slide">
-                    <img src="img/bonetflynn.png" alt="Live performance">
-                    <div class="hero-caption">Live performance</div>
-                </div>
-
+                <button class="hero-carousel-btn prev" id="heroPrev" aria-label="Previous">&#8592;</button>
+                <button class="hero-carousel-btn next" id="heroNext" aria-label="Next">&#8594;</button>
+                <div class="hero-carousel-dots" id="heroDots"></div>
             </div>
 
-            <button class="hero-carousel-btn prev" id="heroPrev" aria-label="Previous">&#8592;</button>
-            <button class="hero-carousel-btn next" id="heroNext" aria-label="Next">&#8594;</button>
-            <div class="hero-carousel-dots" id="heroDots"></div>
+            <!-- Splash on top, fades out -->
+            <div class="hero-splash">
+                <div class="hero-splash-logo">
+                    <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
+                </div>
+            </div>
+
         </div>
+        <!-- END HERO BLOCK -->
 
     </div>
 
