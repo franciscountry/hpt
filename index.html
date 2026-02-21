@@ -39,116 +39,29 @@
             position: relative;
             width: 100%;
             height: 600px;
-        }
-
-        /* ── Carousel underneath ── */
-        .hero-carousel {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
             background: #111;
             border-radius: 4px;
+            overflow: hidden;
         }
 
-        .hero-carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ── Crossfade slideshow ── */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease;
         }
 
-        .hero-carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-            position: relative;
+        .hero-slide.active {
+            opacity: 1;
         }
 
-        .hero-carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .hero-carousel-slide img {
+        .hero-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             object-position: top center;
             display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .hero-caption {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            padding: 40px 24px 16px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.6));
-            color: #fff;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .hero-block:hover .hero-caption {
-            opacity: 1;
-        }
-
-        .hero-carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: rgba(75, 0, 130, 0.75);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: background 0.2s, transform 0.2s;
-            backdrop-filter: blur(4px);
-        }
-
-        .hero-carousel-btn:hover {
-            background: rgba(75, 0, 130, 1);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .hero-carousel-btn.prev { left: 16px; }
-        .hero-carousel-btn.next { right: 16px; }
-
-        .hero-carousel-dots {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .hero-carousel-dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.45);
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .hero-carousel-dot.active {
-            background: #fff;
-            transform: scale(1.25);
         }
 
         /* ── Splash on top, fades out ── */
@@ -160,7 +73,6 @@
             align-items: center;
             justify-content: center;
             z-index: 20;
-            border-radius: 4px;
             animation: fadeOut 1.2s ease forwards;
             animation-delay: 3s;
             pointer-events: none;
@@ -274,41 +186,23 @@
 
     <div class="page-wrap">
 
-        <!-- HERO BLOCK: carousel + splash stacked -->
-        <div class="hero-block">
+        <div class="hero-block" id="heroBlock">
 
-            <!-- Carousel underneath -->
-            <div class="hero-carousel" id="heroCarousel" aria-label="Hot Pants & Tony photos">
-                <div class="hero-carousel-track" id="heroTrack">
-
-                    <div class="hero-carousel-slide">
-                        <img src="img/hptlaughing.jpg" alt="Hot Pants & Tony">
-                        <div class="hero-caption">Hot Pants &amp; Tony</div>
-                    </div>
-
-                    <div class="hero-carousel-slide">
-                        <img src="img/bonetflynn2.jpg" alt="On stage together">
-                        <div class="hero-caption">On stage together</div>
-                    </div>
-
-                    <div class="hero-carousel-slide">
-                        <img src="img/bonetflynn.png" alt="Live performance">
-                        <div class="hero-caption">Live performance</div>
-                    </div>
-
-                    <div class="hero-carousel-slide">
-                        <img src="img/hptoriginal.png" alt="Live performance">
-                        <div class="hero-caption">Live performance</div>
-                    </div>
-
-                </div>
-
-                <button class="hero-carousel-btn prev" id="heroPrev" aria-label="Previous">&#8592;</button>
-                <button class="hero-carousel-btn next" id="heroNext" aria-label="Next">&#8594;</button>
-                <div class="hero-carousel-dots" id="heroDots"></div>
+            <!-- Slides — all stacked, JS fades them in/out -->
+            <div class="hero-slide active">
+                <img src="img/hptlaughing.jpg" alt="Hot Pants & Tony">
+            </div>
+            <div class="hero-slide">
+                <img src="img/bonetflynn2.jpg" alt="On stage together">
+            </div>
+            <div class="hero-slide">
+                <img src="img/bonetflynn.png" alt="Live performance">
+            </div>
+            <div class="hero-slide">
+                <img src="img/hptoriginal.png" alt="Live performance">
             </div>
 
-            <!-- Splash on top, fades out -->
+            <!-- Splash on top, fades out after 3s -->
             <div class="hero-splash">
                 <div class="hero-splash-logo">
                     <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
@@ -316,7 +210,6 @@
             </div>
 
         </div>
-        <!-- END HERO BLOCK -->
 
     </div>
 
@@ -356,7 +249,7 @@
             <div class="contact">
                 <h2>Booking & Press</h2>
                 <div class="contact-info">
-                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="abccc2ccccc2c5ccebc3dbdfc4c5d285c8c4c6">[email&#160;protected]</a></p>
+                    <p><strong>Email:</strong> gigging@hptony.com</p>
                     <p><strong>Instagram:</strong> @HotPantsTony</p>
                     <p><strong>Based In:</strong> Trenton, NJ</p>
                 </div>
@@ -366,58 +259,25 @@
 
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         (function () {
-            const track    = document.getElementById('heroTrack');
-            const slides   = track.querySelectorAll('.hero-carousel-slide');
-            const dotsWrap = document.getElementById('heroDots');
-            const prevBtn  = document.getElementById('heroPrev');
-            const nextBtn  = document.getElementById('heroNext');
-            const carousel = document.getElementById('heroCarousel');
-            let current = 0, autoTimer;
+            const slides = document.querySelectorAll('.hero-slide');
+            let current = 0;
 
-            // Build dots
-            slides.forEach((_, i) => {
-                const d = document.createElement('button');
-                d.className = 'hero-carousel-dot' + (i === 0 ? ' active' : '');
-                d.setAttribute('aria-label', 'Photo ' + (i + 1));
-                d.addEventListener('click', () => { goTo(i); resetAuto(); });
-                dotsWrap.appendChild(d);
-            });
-
-            function getDots() {
-                return dotsWrap.querySelectorAll('.hero-carousel-dot');
+            function next() {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
             }
 
-            function goTo(i) {
-                current = (i + slides.length) % slides.length;
-                track.style.transform = 'translateX(-' + (current * 100) + '%)';
-                getDots().forEach((d, j) => d.classList.toggle('active', j === current));
-            }
+            // Start cycling after the splash has cleared (4.5s),
+            // then every 5s thereafter
+            setTimeout(function () {
+                next();
+                setInterval(next, 5000);
+            }, 4500);
+        })();
+    </script>
 
-            prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
-            nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
-
-            // Swipe support
-            let startX = 0;
-            track.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].clientX;
-            }, { passive: true });
-            track.addEventListener('touchend', function(e) {
-                const diff = startX - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 40) {
-                    diff > 0 ? goTo(current + 1) : goTo(current - 1);
-                    resetAuto();
-                }
-            });
-
-            function startAuto() {
-                autoTimer = setInterval(function() { goTo(current + 1); }, 7000);
-            }
-
-            function resetAuto() {
-                clearInterval(autoTimer);
-                startAuto();
-            }
-
- 
+</body>
+</html>
