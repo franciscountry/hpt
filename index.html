@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hot Pants & Tony - Official Site</title>
 
-    <!-- Google Font: Inter Tight (SemiBold 600) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
 
     <style>
@@ -20,7 +19,8 @@
 
         /* 2. The Hero Wrapper */
         .hero-wrapper {
-            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
+            /* Kept the dark radial gradient to frame the new orange art container */
+            background: radial-gradient(circle at center, #1a0021 0%, #050505 80%);
             display: flex;
             justify-content: center;
             width: 100%;
@@ -32,7 +32,16 @@
             width: 100%;
             max-width: 900px;
             line-height: 0;
-            filter: drop-shadow(0px 0px 50px rgba(75, 0, 130, 0.5));
+            
+            /* NEW: Adding the orange_bg.jpg here */
+            background-image: url('orange_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            
+            /* Updated shadow to match the warmer orange/red tones */
+            filter: drop-shadow(0px 0px 50px rgba(255, 69, 0, 0.3));
+            overflow: hidden; /* Keeps background contained */
+            border-radius: 4px; /* Optional: adds a slight corner soften to the art box */
         }
 
         .character-layer {
@@ -41,7 +50,8 @@
             display: block;
             position: relative;
             z-index: 1;
-            filter: drop-shadow(0px 0px 10px rgba(255, 0, 255, 0.2));
+            /* Subtle neon edge to separate characters from the new bright background */
+            filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.2));
         }
 
         .dark-tint {
@@ -50,6 +60,8 @@
             left: 0;
             width: 100%;
             height: 100%;
+            /* You may want to increase this (e.g., 0.35) if the orange background 
+               makes the logo harder to read */
             background-color: rgba(0, 0, 0, 0.25);
             z-index: 5;
             pointer-events: none;
@@ -92,14 +104,12 @@
             font-size: 1.1rem;
         }
 
-        /* Clearfix so floats don't break layout below */
         .bio-full::after {
             content: "";
             display: table;
             clear: both;
         }
 
-        /* H2: Inter Tight 600, uppercase, 2rem */
         h2 {
             font-family: 'Inter Tight', sans-serif;
             font-weight: 600;
@@ -112,12 +122,11 @@
             padding-left: 15px;
         }
 
-        /* Vertical video floated right so text wraps underneath it */
         .video-container {
             float: right;
             width: 320px;
             aspect-ratio: 9 / 16;
-            margin: 0 0 20px 40px; /* top right bottom left */
+            margin: 0 0 20px 40px;
             border-radius: 8px;
             overflow: hidden;
             background: #000;
@@ -130,7 +139,6 @@
             border: 0;
         }
 
-        /* Bio image */
         .bio-image {
             width: 100%;
             height: auto;
@@ -158,13 +166,10 @@
             padding: 5px 0;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
             .info-section { padding: 30px; margin: 0 auto; }
             .logo-overlay { width: 85%; }
-
-            /* Stop floating on mobile so it stacks nicely */
             .video-container {
                 float: none;
                 width: 100%;
@@ -189,10 +194,8 @@
 
     <div class="info-section">
         <div class="bio-full">
-
             <h2>The Dynamic Duo</h2>
 
-            <!-- Floated vertical video -->
             <div class="video-container">
                 <iframe
                     src="https://www.youtube.com/embed/oWgqxuIePRM?si=BxUWFF2S-DYFTQrr"
@@ -235,8 +238,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </body>
 </html>
