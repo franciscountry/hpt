@@ -15,79 +15,182 @@
             color: #333;
         }
 
-        .hero-wrapper {
-            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding: 40px 0;
-        }
-
-        .art-container {
-            position: relative;
-            width: 100%;
-            max-width: 1100px;
-            line-height: 0;
-            filter: drop-shadow(0px 0px 50px rgba(75, 0, 130, 0.5));
-        }
-
-        .character-layer {
-            width: 100%;
-            height: auto;
-            display: block;
-            position: relative;
-            z-index: 1;
-            filter: drop-shadow(0px 0px 10px rgba(255, 0, 255, 0.2));
-            opacity: 0;
-            animation: fadeIn 1.2s ease forwards;
-            animation-delay: 0.9s;
-        }
-
-        .dark-tint {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.25);
-            z-index: 5;
-            pointer-events: none;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 1.6s;
-        }
-
-        .logo-overlay {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            z-index: 10;
-            pointer-events: none;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .logo-overlay img {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0px 0px 20px rgba(0,0,0,1));
-        }
-
+        /* ===================== KEYFRAMES ===================== */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to   { opacity: 1; transform: translate(-50%, -50%); }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to   { opacity: 1; }
         }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to   { opacity: 0; pointer-events: none; }
+        }
 
+        /* ===================== INTRO SPLASH ===================== */
+        /* Sits in the page flow, same 600px height as the carousel beneath */
+        .hero-intro {
+            width: 100%;
+            height: 600px;
+            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 30;
+            /* Hold for 3s, then fade out over 1s */
+            animation: fadeOut 1s ease forwards;
+            animation-delay: 3s;
+            pointer-events: none;
+        }
+
+        .hero-intro-logo {
+            width: 55%;
+            max-width: 580px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-intro-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 0px 25px rgba(0,0,0,1));
+        }
+
+        /* ===================== PAGE WRAPPER ===================== */
+        /* Centers everything at 1100px */
+        .page-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===================== AVATAR LOGO ===================== */
+        .site-logo-avatar {
+            display: block;
+            width: 150px;
+            padding: 14px 0 8px 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 4.2s;
+        }
+
+        .site-logo-avatar img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0px 2px 6px rgba(75,0,130,0.35));
+        }
+
+        /* ===================== HERO CAROUSEL ===================== */
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background: #111;
+            border-radius: 4px;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 3.8s;
+        }
+
+        .hero-carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .hero-carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 40px 24px 16px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            color: #fff;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .hero-carousel:hover .hero-caption {
+            opacity: 1;
+        }
+
+        .hero-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(75, 0, 130, 0.75);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-carousel-btn:hover {
+            background: rgba(75, 0, 130, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .hero-carousel-btn.prev { left: 16px; }
+        .hero-carousel-btn.next { right: 16px; }
+
+        .hero-carousel-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .hero-carousel-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .hero-carousel-dot.active {
+            background: #fff;
+            transform: scale(1.25);
+        }
+
+        /* ===================== INFO SECTION ===================== */
         .info-section {
             background-color: #ffffff;
             max-width: 1100px;
-            margin: -20px auto 40px;
+            margin: 0 auto 40px;
             padding: 50px;
             box-sizing: border-box;
             box-shadow: 0px 15px 40px rgba(0,0,0,0.2);
@@ -139,7 +242,7 @@
             border: 0;
         }
 
-        /* ===================== CAROUSEL ===================== */
+        /* ===================== BIO CAROUSEL ===================== */
         .carousel {
             position: relative;
             width: 100%;
@@ -223,9 +326,7 @@
 
         .carousel-caption {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             padding: 30px 20px 14px;
             background: linear-gradient(transparent, rgba(0,0,0,0.55));
             color: #fff;
@@ -238,8 +339,8 @@
         .carousel:hover .carousel-caption {
             opacity: 1;
         }
-        /* ===================== END CAROUSEL ===================== */
 
+        /* ===================== SPOTIFY ===================== */
         .spotify-embed {
             margin: 20px 0;
         }
@@ -249,6 +350,7 @@
             border-radius: 12px;
         }
 
+        /* ===================== INFO GRID ===================== */
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -267,10 +369,12 @@
             padding: 5px 0;
         }
 
+        /* ===================== MOBILE ===================== */
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
-            .info-section { padding: 30px; margin: 0 auto; }
-            .logo-overlay { width: 85%; }
+            .info-section { padding: 30px; }
+            .hero-intro, .hero-carousel { height: 400px; }
+            .site-logo-avatar { width: 110px; }
             .video-container {
                 float: none;
                 width: 100%;
@@ -283,16 +387,48 @@
 </head>
 <body>
 
-    <div class="hero-wrapper">
-        <div class="art-container">
-            <img src="img/hptguild.png" alt="Hot Pants and Tony Characters" class="character-layer">
-            <div class="dark-tint"></div>
-            <div class="logo-overlay">
-                <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
-            </div>
+    <!-- INTRO SPLASH -->
+    <div class="hero-intro">
+        <div class="hero-intro-logo">
+            <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
         </div>
     </div>
 
+    <!-- AVATAR + HERO CAROUSEL -->
+    <div class="page-wrap">
+
+        <a class="site-logo-avatar" href="#">
+            <img src="img/hptscript.png" alt="Hot Pants & Tony">
+        </a>
+
+        <div class="hero-carousel" id="heroCarousel" aria-label="Hot Pants & Tony hero photos">
+            <div class="hero-carousel-track" id="heroTrack">
+
+                <div class="hero-carousel-slide">
+                    <img src="img/bonetflynn.png" alt="Hot Pants & Tony">
+                    <div class="hero-caption">Hot Pants &amp; Tony</div>
+                </div>
+
+                <div class="hero-carousel-slide">
+                    <img src="img/bonetflynn2.jpg" alt="On stage together">
+                    <div class="hero-caption">On stage together</div>
+                </div>
+
+                <div class="hero-carousel-slide">
+                    <img src="img/bonetflynn.png" alt="Live performance">
+                    <div class="hero-caption">Live performance</div>
+                </div>
+
+            </div>
+
+            <button class="hero-carousel-btn prev" id="heroPrev" aria-label="Previous">&#8592;</button>
+            <button class="hero-carousel-btn next" id="heroNext" aria-label="Next">&#8594;</button>
+            <div class="hero-carousel-dots" id="heroDots"></div>
+        </div>
+
+    </div>
+
+    <!-- INFO SECTION -->
     <div class="info-section">
 
         <div class="bio-full">
@@ -307,7 +443,7 @@
                 Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that's anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn't your typical violin-and-guitar act—there's no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they're delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that's as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin' guitar, anything can happen!
             </p>
 
-            <!-- CAROUSEL -->
+            <!-- BIO CAROUSEL -->
             <div class="carousel" id="photoCarousel" aria-label="Hot Pants & Tony photo slideshow">
                 <div class="carousel-track" id="carouselTrack">
 
@@ -332,7 +468,6 @@
                 <button class="carousel-btn next" id="nextBtn" aria-label="Next photo">&#8594;</button>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
-            <!-- END CAROUSEL -->
 
             <!-- SPOTIFY -->
             <div class="spotify-embed">
@@ -367,7 +502,7 @@
             <div class="contact">
                 <h2>Booking & Press</h2>
                 <div class="contact-info">
-                    <p><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6e090709090700092e061e1a010017400d0103">[email&#160;protected]</a></p>
+                    <p><strong>Email:</strong> gigging@hptony.com</p>
                     <p><strong>Instagram:</strong> @HotPantsTony</p>
                     <p><strong>Based In:</strong> Trenton, NJ</p>
                 </div>
@@ -377,40 +512,36 @@
 
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        // ── Hero carousel ──
         (function () {
-            const track = document.getElementById('carouselTrack');
-            const slides = track.querySelectorAll('.carousel-slide');
-            const dotsContainer = document.getElementById('carouselDots');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const carousel = document.getElementById('photoCarousel');
-            let current = 0;
-            let autoTimer;
+            const track = document.getElementById('heroTrack');
+            const slides = track.querySelectorAll('.hero-carousel-slide');
+            const dotsWrap = document.getElementById('heroDots');
+            const prevBtn = document.getElementById('heroPrev');
+            const nextBtn = document.getElementById('heroNext');
+            const carousel = document.getElementById('heroCarousel');
+            let current = 0, autoTimer;
 
-            // Build dots
             slides.forEach((_, i) => {
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
-                dot.addEventListener('click', () => { goTo(i); resetAuto(); });
-                dotsContainer.appendChild(dot);
+                const d = document.createElement('button');
+                d.className = 'hero-carousel-dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Photo ' + (i + 1));
+                d.addEventListener('click', () => { goTo(i); resetAuto(); });
+                dotsWrap.appendChild(d);
             });
 
-            function getDots() {
-                return dotsContainer.querySelectorAll('.carousel-dot');
-            }
+            function dots() { return dotsWrap.querySelectorAll('.hero-carousel-dot'); }
 
-            function goTo(index) {
-                current = (index + slides.length) % slides.length;
+            function goTo(i) {
+                current = (i + slides.length) % slides.length;
                 track.style.transform = `translateX(-${current * 100}%)`;
-                getDots().forEach((d, i) => d.classList.toggle('active', i === current));
+                dots().forEach((d, j) => d.classList.toggle('active', j === current));
             }
 
             prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
             nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
 
-            // Swipe support
             let startX = 0;
             track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
             track.addEventListener('touchend', e => {
@@ -418,11 +549,60 @@
                 if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
             });
 
-            function startAuto() {
-                autoTimer = setInterval(() => goTo(current + 1), 7000);
+            function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 7000); }
+            function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+            carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+            carousel.addEventListener('mouseleave', startAuto);
+
+            startAuto();
+        })();
+
+        // ── Bio carousel ──
+        (function () {
+            const track = document.getElementById('carouselTrack');
+            const slides = track.querySelectorAll('.carousel-slide');
+            const dotsWrap = document.getElementById('carouselDots');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const carousel = document.getElementById('photoCarousel');
+            let current = 0, autoTimer;
+
+            slides.forEach((_, i) => {
+                const d = document.createElement('button');
+                d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Photo ' + (i + 1));
+                d.addEventListener('click', () => { goTo(i); resetAuto(); });
+                dotsWrap.appendChild(d);
+            });
+
+            function dots() { return dotsWrap.querySelectorAll('.carousel-dot'); }
+
+            function goTo(i) {
+                current = (i + slides.length) % slides.length;
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dots().forEach((d, j) => d.classList.toggle('active', j === current));
             }
 
-            function resetAuto() {
-                clearInterval(autoTimer);
-                startAuto();
-      
+            prevBtn.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+            nextBtn.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+            let startX = 0;
+            track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetAuto(); }
+            });
+
+            function startAuto() { autoTimer = setInterval(() => goTo(current + 1), 7000); }
+            function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
+            carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+            carousel.addEventListener('mouseleave', startAuto);
+
+            startAuto();
+        })();
+    </script>
+
+</body>
+</html>
