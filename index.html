@@ -171,23 +171,27 @@
             filter: drop-shadow(0px 0px 25px rgba(0,0,0,1));
         }
 
-        /* ===================== AVATAR LOGO ===================== */
-        .site-logo-avatar {
-            display: block;
+        /* ===================== AVATAR WATERMARK ===================== */
+        .hero-avatar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             width: 150px;
-            padding: 14px 0 8px 20px;
+            z-index: 15;
             opacity: 0;
+            pointer-events: none;
             animation: fadeIn 1s ease forwards;
             animation-delay: 4s;
         }
 
-        .site-logo-avatar img {
+        .hero-avatar img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(0px 2px 6px rgba(75,0,130,0.35));
+            opacity: 0.55;
+            filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.5));
         }
 
-        /* ===================== INFO SECTION ===================== */
+                /* ===================== INFO SECTION ===================== */
         .info-section {
             background-color: #ffffff;
             max-width: 1100px;
@@ -282,11 +286,6 @@
 
     <div class="page-wrap">
 
-        <!-- AVATAR LOGO -->
-        <a class="site-logo-avatar" href="#">
-            <img src="img/hptavatar.png" alt="Hot Pants & Tony">
-        </a>
-
         <!-- HERO BLOCK: carousel + splash stacked -->
         <div class="hero-block">
 
@@ -321,6 +320,12 @@
                 <div class="hero-splash-logo">
                     <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
                 </div>
+            </div>
+
+
+            <!-- AVATAR WATERMARK -->
+            <div class="hero-avatar">
+                <img src="img/hptguild.png" alt="Hot Pants & Tony">
             </div>
 
         </div>
