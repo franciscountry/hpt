@@ -153,7 +153,7 @@
 
         .carousel-track {
             display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .carousel-slide {
@@ -419,7 +419,7 @@
             });
 
             function startAuto() {
-                autoTimer = setInterval(() => goTo(current + 1), 4000);
+                autoTimer = setInterval(() => goTo(current + 1), 7000);
             }
 
             function resetAuto() {
