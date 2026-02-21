@@ -4,41 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hot Pants & Tony - Official Site</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600&display=swap" rel="stylesheet">
-
     <style>
         /* 1. Page Setup */
         body {
             margin: 0;
             padding: 0;
-            background-color: #0d0600; /* Darker orange-black base */
+            background-color: #f4f4f4; 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #333;
         }
 
-        /* 2. The Hero Wrapper - New Orange Gradient */
+        /* 2. The Hero Wrapper */
         .hero-wrapper {
-            /* Transitions from a glowing orange to a dark ember/black */
-            background: radial-gradient(circle at center, #8b4513 0%, #2b1400 60%, #050505 100%);
+            background: radial-gradient(circle at center, #4b0082 0%, #1a0021 40%, #050505 80%);
             display: flex;
             justify-content: center;
             width: 100%;
-            padding: 40px 0 100px 0;
+            padding: 40px 0;
         }
 
         .art-container {
-            position: relative;
+            position: relative; 
             width: 100%;
             max-width: 900px;
             line-height: 0;
-            /* background-image: url('img/orange_bg3.png');*/
-            background-size: cover;
-            background-position: center;
-            overflow: hidden;
-            border-radius: 4px;
-            /* Added an orange outer glow to help it melt into the gradient */
-            box-shadow: 0px 0px 60px rgba(255, 140, 0, 0.2);
+            filter: drop-shadow(0px 0px 50px rgba(75, 0, 130, 0.5));
         }
 
         .character-layer {
@@ -47,26 +37,25 @@
             display: block;
             position: relative;
             z-index: 1;
+            filter: drop-shadow(0px 0px 10px rgba(255, 0, 255, 0.2));
         }
 
-        /* 3. Shadow Layer & Logo Depth */
         .dark-tint {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Subtle darkening to keep the foreground/background separation */
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+            background-color: rgba(0, 0, 0, 0.25);
             z-index: 5;
             pointer-events: none;
         }
 
         .logo-overlay {
             position: absolute;
-            top: 55%;
+            top: 60%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); 
             width: 60%;
             z-index: 10;
             pointer-events: none;
@@ -75,67 +64,35 @@
         .logo-overlay img {
             width: 100%;
             height: auto;
-            /* Deep shadows to ensure the logo pops against the orange */
-            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.9)) drop-shadow(0px 0px 30px rgba(0,0,0,0.6));
+            filter: drop-shadow(0px 0px 20px rgba(0,0,0,1));
         }
 
-        /* 4. Glassmorphism Info Section */
+        /* 3. The Info & Video Section */
         .info-section {
-            background: rgba(255, 255, 255, 0.82); 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 254, 230, 0.5); /* Slight warm tint to the glass edge */
+            background-color: #ffffff;
             max-width: 900px;
-            margin: -80px auto 40px;
+            margin: -20px auto 40px;
             padding: 50px;
             box-sizing: border-box;
-            box-shadow: 0px 20px 50px rgba(0,0,0,0.4);
+            box-shadow: 0px 15px 40px rgba(0,0,0,0.2);
             position: relative;
             z-index: 20;
-            border-radius: 16px;
+            border-radius: 4px;
         }
 
         .bio-full {
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid #eee;
             padding-bottom: 30px;
             margin-bottom: 30px;
             line-height: 1.8;
             font-size: 1.1rem;
         }
 
-        h2 {
-            font-family: 'Inter Tight', sans-serif;
-            font-weight: 600;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #d35400; /* Switched header color to a bold orange-red */
-            margin-bottom: 20px;
-            border-left: 5px solid #d35400;
-            padding-left: 15px;
-        }
-
-        .video-container {
-            float: right;
-            width: 320px;
-            aspect-ratio: 9 / 16;
-            margin: 0 0 20px 40px;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.5);
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
+        /* FIXED: Image height is now automatic to prevent cropping heads */
         .bio-image {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
+            width: 100%;            /* Keeps it responsive */
+            height: auto;           /* Displays the full height of the photo */
+            border-radius: 8px;
             margin: 30px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             display: block;
@@ -148,6 +105,16 @@
             margin-bottom: 40px;
         }
 
+        h2 {
+            color: #050505;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #4b0082;
+            padding-left: 15px;
+        }
+
         .schedule-list, .contact-info {
             list-style: none;
             padding: 0;
@@ -155,20 +122,36 @@
         }
 
         .schedule-list li {
-            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            border-bottom: 1px dashed #ddd;
             padding: 5px 0;
         }
 
+        /* 4. Responsive Video Styles */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .info-grid { grid-template-columns: 1fr; gap: 30px; }
-            .info-section { padding: 30px; margin: -40px 15px 40px 15px; }
+            .info-section { padding: 30px; margin: 0 auto; }
             .logo-overlay { width: 85%; }
-            .video-container {
-                float: none;
-                width: 100%;
-                max-width: 320px;
-                margin: 20px auto;
-            }
         }
     </style>
 </head>
@@ -176,10 +159,10 @@
 
     <div class="hero-wrapper">
         <div class="art-container">
-            <img src="img/hptguild.png" alt="Hot Pants and Tony Characters" class="character-layer">
+            <img src="hptguild.png" alt="Hot Pants and Tony Characters" class="character-layer">
             <div class="dark-tint"></div>
             <div class="logo-overlay">
-                <img src="img/hptscript.png" alt="Hot Pants & Tony Logo">
+                <img src="hptscript.png" alt="Hot Pants & Tony Logo">
             </div>
         </div>
     </div>
@@ -187,16 +170,12 @@
     <div class="info-section">
         <div class="bio-full">
             <h2>The Dynamic Duo</h2>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/oWgqxuIePRM?si=BxUWFF2S-DYFTQrr" title="YouTube video player" allowfullscreen></iframe>
-            </div>
-             <p>
-                Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that’s anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn’t your typical violin-and-guitar act—there’s no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they’re delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that’s as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin’ guitar, anything can happen!
-            </p>
-            <img src="img/bonetflynn.png" alt="Hot Pants & Tony in action" class="bio-image">
-             <p>
-                Behind the retro swagger, Hot Pants & Tony are the alter egos of acclaimed performers Deni Bonet and Chris Flynn, whose long-running musical partnership has taken them from Carnegie Hall and the White House, to the Great Wall of China and stages across the U.S. and Ireland. Together and individually, they have shared bills with artists including Cyndi Lauper, R.E.M., Mundy, Sarah McLachlan, The Chieftains, and members of The Pogues and Black 47. With Hot Pants & Tony, they bring that same world-class musicianship and chemistry to a wildly fun, crowd-pleasing covers show built for packed pubs, lively festivals, and unforgettable nights.
-            </p>
+            
+            <p>Hailing from opposite sides of the Hudson River, Hot Pants (NYC) and Tony (New Jersey) come together to create a duo that’s anything but predictable. With Hot Pants wielding a striking blue electric violin and Tony laying down soulful guitar grooves, they take the songs you love and twist them into something fresh, unexpected, and totally unforgettable. This isn’t your typical violin-and-guitar act—there’s no fiddle music here! Instead, they put their own bold, high-energy spin on classic rock, blues, folk, and more, reimagining everything from beloved anthems to deep-cut favorites with soaring harmonies and electrifying arrangements. Known for their playful stage presence, powerhouse vocals, and jaw-dropping musicianship, Hot Pants & Tony have a knack for making every performance feel intimate, exciting, and full of surprises. Whether they’re delivering a soul-stirring ballad or turning a familiar hit into something you never saw coming, they guarantee a show that’s as thrilling as it is fun. So grab a pint, warm up your singing voice, and get ready to experience your favorite songs like never before. Because when a blue violin meets a rockin’ guitar, anything can happen!</p>
+
+            <img src="bonetflynn.png" alt="Hot Pants & Tony in action" class="bio-image">
+
+            <p>Behind the retro swagger, Hot Pants & Tony are the alter egos of acclaimed performers Deni Bonet and Chris Flynn, whose long-running musical partnership has taken them from Carnegie Hall and the White House, to the Great Wall of China and stages across the U.S. and Ireland. Together and individually, they have shared bills with artists including Cyndi Lauper, R.E.M., Mundy, Sarah McLachlan, The Chieftains, and members of The Pogues and Black 47. With Hot Pants & Tony, they bring that same world-class musicianship and chemistry to a wildly fun, crowd-pleasing covers show built for packed pubs, lively festivals, and unforgettable nights.</p>
         </div>
 
         <div class="info-grid">
@@ -209,6 +188,7 @@
                     <li><strong>MAY 19</strong> — Asbury Park Soundstage</li>
                 </ul>
             </div>
+
             <div class="contact">
                 <h2>Booking & Press</h2>
                 <div class="contact-info">
@@ -216,6 +196,18 @@
                     <p><strong>Instagram:</strong> @HotPantsTony</p>
                     <p><strong>Based In:</strong> Trenton, NJ</p>
                 </div>
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2>Watch & Listen</h2>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Hot Pants & Tony Performance" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
     </div>
